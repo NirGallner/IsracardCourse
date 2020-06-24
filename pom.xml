@@ -20,7 +20,15 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
 			<version>5.7.0-M1</version>
+			<scope>Test</scope>
 		</dependency>
-
+		
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/before-after-hook -->
+		<dependency>
+    		<groupId>org.webjars.npm</groupId>
+    		<artifactId>before-after-hook</artifactId>
+    		<version>2.1.0</version>
+		</dependency>
+		
 	</dependencies>
 </project>
