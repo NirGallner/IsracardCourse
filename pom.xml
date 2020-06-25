@@ -23,5 +23,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/before-after-hook -->
+		<dependency>
+    		<groupId>org.webjars.npm</groupId>
+    		<artifactId>before-after-hook</artifactId>
+    		<version>2.1.0</version>
+		</dependency>
+
 	</dependencies>
 </project>
