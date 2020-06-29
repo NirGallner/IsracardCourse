@@ -48,8 +48,11 @@ static WebDriver driver;
 		Thread.sleep(2000);
 		
 		WebElement dashboardHeader = driver.findElement(By.xpath("//*[@id=\"wpbody-content\"]/div[4]/h1"));
+		WebElement x = driver.findElement(By.xpath("//div[@class=\"wp-menu-name\"]/.."));
 		
-		Assertions.assertEquals("Dashboard", dashboardHeader.getText());
+		x.click();
+		
+		//Assertions.assertEquals("Dashboard", dashboardHeader.getText());
 	}
 	
 	@Tag("isracard") 
@@ -75,14 +78,13 @@ static WebDriver driver;
 		
 		Thread.sleep(7000);
 		
-		////*[@id=\"collapse1\"]//a[2]  //a[@href='http://demo.guru99.com/']
 	//	WebElement myCardsButton = driver.findElement(By.xpath("//a[@href='/personalarea/cardlist/']"));
 	//	WebElement chatButton = driver.findElement(By.xpath("//*[@id=\"wizSideBarSpecial\"]//button"));
 	//	WebElement billingInfo = driver.findElement(By.xpath("//a[@href='/personalarea/billing-charges/']"));
 	//	WebElement accessibility = driver.findElement(By.xpath("//*[@title='לחץ לקבלת תפריט הנגישות']"));
-		WebElement accessibility = driver.findElement(By.xpath("//*[@aria-label='כל הלקוחות activate']"));
+	//	WebElement allClientDropdown = driver.findElement(By.xpath("//*[@aria-label='כל הלקוחות activate']"));
 		
-		accessibility.click();
+	//	accessibility.click();
 		Thread.sleep(5000);
 		
 	}
