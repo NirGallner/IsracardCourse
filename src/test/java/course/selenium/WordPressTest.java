@@ -11,9 +11,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
@@ -22,6 +24,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  * @author Nir Gallner
  *
  */
+@Disabled
 public class WordPressTest {
 
 	// Define a static driver - to be initialized in @BeforeAll
@@ -74,6 +77,23 @@ public class WordPressTest {
 		// Check if the title contains the word - Dashboard
 		String pageTitle = driver.getTitle();
 		assertTrue(pageTitle.contains("Dashboard"), "Dashboard should appear in title");
+	}
+	
+	@Test
+	public void lastPost() {
+		
+		// Goto posts list
+		driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']")).click();
+		
+		// Get the entire table
+		WebElement allPosts = driver.findElement(By.id("the-list"));
+		
+		// Get the text of the oldest post
+		String postName = allPosts.findElement(By.xpath("(.//tr)[last()]//a")).getText();
+		
+		// Check the name
+		assertTrue(postName.equals("Hello world!"), "Post is not hellow world...");
+		
 	}
 
 	@AfterAll
