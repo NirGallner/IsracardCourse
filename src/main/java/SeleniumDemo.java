@@ -11,11 +11,12 @@ public class SeleniumDemo {
 		
 		
 		// Tell WebDriver where is the chromeDriver.exe
-		System.setProperty("webdriver.chrome.driver", "C:/Users/galln/Downloads/ChromeDriver83/chromedriver.exe");
-		System.setProperty("webdriver.gecko.driver", "C:/Users/galln/Downloads/ChromeDriver83/geckodriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:/Windows/Temp/chromedriver_win32/chromedriver.exe");
+		//System.setProperty("webdriver.gecko.driver", "C:/Users/galln/Downloads/ChromeDriver83/geckodriver.exe");
 		
 		// Create a new ChromDriver instance
 		WebDriver driver = new ChromeDriver();
+		
 		
 		// Get google
 		driver.get("http://www.google.com");
