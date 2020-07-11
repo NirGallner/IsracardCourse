@@ -20,7 +20,8 @@ public class WorldPressNewPostTest {
 	
 	private static WebDriver driver;
 
-	private String bodyText = "Gal Post";
+	private String title = "Gal Post";
+
 	
 		@BeforeAll
 		public static void setup() throws InterruptedException {
@@ -30,7 +31,7 @@ public class WorldPressNewPostTest {
 			System.setProperty("webdriver.chrome.driver", "C:\\Windows\\Temp\\chromedriver.exe");
 			driver = new ChromeDriver();
 			driver.manage().window().maximize();
-			driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(6,TimeUnit.SECONDS);
 	
 			driver.get("http://demosite.center/wordpress/wp-login.php");
 			WebElement userName = driver.findElement(By.id("user_login"));
@@ -46,27 +47,27 @@ public class WorldPressNewPostTest {
 		}
 		
 			@Test
+			//click on posts
 			public void NewPost() throws InterruptedException {
 			WebElement Post = driver.findElement(By.id("menu-posts"));
 			Post.click();
 			System.out.println("ClickOnPost");
 			
 		
-		
+		    //click on add new button 
 			WebElement AddNew = driver.findElement(By.className("page-title-action"));
 			AddNew.click();
 			System.out.println("Click on AddNew");
 			
 		
 
-		
+            // insert title		
 			WebElement EnterTittle = driver.findElement(By.id("title"));
-//			String title = "Gal Post";
-			EnterTittle.sendKeys(bodyText);
+			EnterTittle.sendKeys(title);
 			System.out.println("TittleCreated");
 			
 		
-		
+		    //insert text in text frame
 			WebElement EnterText = driver.findElement(By.id("content"));
 			String BodyText = "Gal Wasserman";
 			EnterText.sendKeys(BodyText);
@@ -74,29 +75,22 @@ public class WorldPressNewPostTest {
 			
 		
 		
-		
+		    // click on publish button 
 			WebElement Publish = driver.findElement(By.id("publish"));
 			Publish.click();;
 			System.out.println("Published");
 			
 		
-		
+		    //back to posts table
 			WebElement Postt = driver.findElement(By.xpath("//*[@id=\"menu-posts\"]/a/div[3]"));
 			Postt.click();
-			Thread.sleep(5000);
 			
-		
-		
-
-
-		
-			
-			//WebElement allPosts = driver.findElement(By.id("the-list"));
+            // check is this post exist
 			List<WebElement>  allPostTitleList = driver.findElements(By.xpath("//*[@id='the-list']//td[contains(@class, 'title')]"));
 			
 			boolean valueFound = false;
-			for (WebElement e : allPostTitleList) {
-				if (e.getText().equals(bodyText)) {
+			for (WebElement checkList : allPostTitleList) {
+				if (checkList.getText().equals(title)) {
 					valueFound = true;
 					break;
 				}
@@ -106,21 +100,17 @@ public class WorldPressNewPostTest {
 			
 			System.out.println("Postexistornotexist");
 		
-			
-			
-	
 		}
 
-			private void checkValueExists(List<WebElement> allPostTitleList, String string) {
-				// TODO Auto-generated method stub
+			
 				
-			}
-		//@AfterAll
-	//	public static void teardown() {
-	//	driver.quit();
+			
+		@AfterAll
+		public static void teardown() {
+		driver.quit();
 	}
 		
-
+}
 		
 
 
