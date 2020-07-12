@@ -8,6 +8,7 @@ package course.selenium;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Time;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -103,6 +104,7 @@ public class WordPressTest {
 	public void newPost() throws InterruptedException {
 
 		String postTitle = "My Post Title " + System.currentTimeMillis();
+		
 		// Post element
 		WebElement posts = driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']"));
 
@@ -119,10 +121,15 @@ public class WordPressTest {
 		driver.findElement(By.xpath("//*[@id='postdivrich']//textarea")).sendKeys("My post body");
 
 		// submit
+		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']")).click();
 
+		// for example
+		//		WebElement submit = driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']"));
+		//		submit.click();
+
 		// Wait for update
-		Thread.sleep(9000);
+		Thread.sleep(3000);
 
 		// submitted?
 		WebElement submit = driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']"));
@@ -136,9 +143,70 @@ public class WordPressTest {
 		// Get the entire table
 		WebElement allPosts = driver.findElement(By.id("the-list"));
 
+		List<WebElement> postNames = allPosts.findElements(By.xpath("(.//tr)//td//strong//a"));
+		
+		boolean found = false;
+		for (WebElement element : postNames) {
+			if (element.getText().contentEquals(postTitle)) {
+				found = true;
+				break;
+			}
+		}
+		// Get the text of the oldest post
+		// String postName = allPosts.findElement(By.xpath("(.//tr)//a")).getText();
+		
+		// assertTrue(postName.contentEquals(postTitle));
+		assertTrue(found);
+		
+		Thread.sleep(5000);
+
+	}
+	
+	@Test
+	public void newPostInitial() throws InterruptedException {
+
+		String postTitle = "My Post Title " + System.currentTimeMillis();
+		
+		// Post element
+		WebElement posts = driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']"));
+
+		// Hover
+		new Actions(driver).moveToElement(posts).perform();
+
+		// Click on new post
+		driver.findElement(By.linkText("Add New")).click();
+
+		// Title
+		driver.findElement(By.xpath("//*[@id='titlewrap']//input")).sendKeys(postTitle);
+
+		// Body
+		driver.findElement(By.xpath("//*[@id='postdivrich']//textarea")).sendKeys("My post body");
+
+		// submit
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']")).click();
+
+		
+		// Wait for update
+		Thread.sleep(3000);
+
+		// submitted?
+		WebElement submit = driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']"));
+		assertTrue(submit.getAttribute("value").equalsIgnoreCase("update"));
+		
+		// Goto list of posts
+		driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']")).click();
+
+		// Last enetered should be the first one
+
+		// Get the entire table
+		WebElement allPosts = driver.findElement(By.id("the-list"));
+
+		
 		// Get the text of the oldest post
 		String postName = allPosts.findElement(By.xpath("(.//tr)//a")).getText();
 		
+		// assertTrue(postName.contentEquals(postTitle));
 		assertTrue(postName.contentEquals(postTitle));
 		
 		Thread.sleep(5000);
