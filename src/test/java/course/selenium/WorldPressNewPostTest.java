@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,7 +22,7 @@ public class WorldPressNewPostTest {
 	private static WebDriver driver;
 
 	private String title = "Gal Post";
-
+	private String Body = "Gal Wasserman";
 	
 		@BeforeAll
 		public static void setup() throws InterruptedException {
@@ -64,13 +65,13 @@ public class WorldPressNewPostTest {
             // insert title		
 			WebElement EnterTittle = driver.findElement(By.id("title"));
 			EnterTittle.sendKeys(title);
+			EnterTittle.sendKeys(Keys.TAB);
 			System.out.println("TittleCreated");
 			
 		
 		    //insert text in text frame
 			WebElement EnterText = driver.findElement(By.id("content"));
-			String BodyText = "Gal Wasserman";
-			EnterText.sendKeys(BodyText);
+			EnterText.sendKeys(Body);
 			System.out.println("TextCreated");
 			
 		

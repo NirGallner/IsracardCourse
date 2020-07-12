@@ -1,0 +1,10 @@
+//*[@class="welcomeMessage ng-binding"]
+
+
+//*[@class="WizclosedSideBubble"]
+
+//*[@class="page-title"]
+
+//*[@id="Digital_Footer"]/footer/nav/div/div/ul/li[1]/h3/a
+
+//*[@class="breadcrumbs"]
