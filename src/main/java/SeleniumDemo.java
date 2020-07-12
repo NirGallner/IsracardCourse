@@ -9,7 +9,7 @@ public class SeleniumDemo {
 
 	public static void main(String[] args) throws InterruptedException {
 		
-		
+		 
 		// Tell WebDriver where is the chromeDriver.exe
 		System.setProperty("webdriver.chrome.driver", "C:/Users/galln/Downloads/ChromeDriver83/chromedriver.exe");
 		System.setProperty("webdriver.gecko.driver", "C:/Users/galln/Downloads/ChromeDriver83/geckodriver.exe");
