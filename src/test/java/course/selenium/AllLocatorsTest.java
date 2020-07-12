@@ -22,6 +22,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+
 public class AllLocatorsTest {
 
 	static WebDriver driver;
@@ -36,6 +37,7 @@ public class AllLocatorsTest {
 		System.setProperty("webdriver.chrome.driver", "C:/Users/galln/Downloads/ChromeDriver83/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
+
 
 	}
 
@@ -87,13 +89,14 @@ public class AllLocatorsTest {
 	}
 
 	@Test
-	public void byTagName() {
+	public void shouldBe25ImagesInHeader() {
 
 		// How many images are in the title?
 		WebElement headerLinks = driver.findElement(By.id("hdr_main_links"));
 		List<WebElement> allImagesInHeader = headerLinks.findElements(By.tagName("img"));
 		int numOfImagesInHeader = allImagesInHeader.size();
-		assertEquals(numOfImagesInHeader, 25, "The number should be 25");
+		assertEquals(numOfImagesInHeader, 24,"Expected 25 images in header");
+		
 	}
 
 	@Test
