@@ -22,6 +22,7 @@ public class AddNewPostTest {
 		driver = new ChromeDriver();
 		driver.get("http://demosite.center/wordpress/wp-login.php");
 		driver.manage().window().maximize();
+		
 		//Login to wordPress
 		driver.findElement(By.id("user_login")).sendKeys("admin");
 		driver.findElement(By.id("user_pass")).sendKeys("demo123");
@@ -38,7 +39,6 @@ public class AddNewPostTest {
 		Thread.sleep(5000);
 		driver.findElement(By.id("title")).sendKeys("Liraz Post");
 		Thread.sleep(5000);
-		
 		driver.findElement(By.id("content-html")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.id("content")).sendKeys("Liraz Post");
@@ -47,12 +47,13 @@ public class AddNewPostTest {
 		driver.findElement(By.id("publish")).click();
 		Thread.sleep(3000);
 		System.out.println("Post published");
-		//System.out.println(driver.findElement(By.xpath("//*[text()='Post published. ']")).isDisplayed());
-		//search the post
+
+		//Search My post
 		driver.findElement(By.linkText("All Posts")).click();
 		driver.findElement(By.id("post-search-input")).sendKeys("Liraz Post");
 		driver.findElement(By.id("search-submit")).click();
 		Thread.sleep(5000);
+		
 		//Verify the post is exist
 		List<WebElement> webElements = driver.findElements(By.className("row-title"));
 		int Index = webElements.size();
@@ -63,7 +64,6 @@ public class AddNewPostTest {
 				{
 					System.out.println("The post is here");
 					System.out.println(i);
-					//assertEquals("HI", ElementName)
 				}
 			}
 		}

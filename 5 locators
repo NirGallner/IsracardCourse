@@ -1,0 +1,39 @@
+
+
+progress bar-> יתרה לניצול
+//ul[@class="dashboard__cards-list"]/li/div/div[2]/div/div/div
+
+//*[@class="progress-bar"]
+
+
+
+footer-> הסכמים תקנונים ותנאי שימוש
+//div[@id="Digital_Footer"]/footer/nav/div/div/ul/li/ul/li[13]
+
+//*[@class="site-footer__nav-list-second-level"]//*[@href="http://digital.isracard.co.il/pages/agreement/"]
+
+
+
+תמונת כרטיס
+//section[@class="dashboard__box dashboard__cards-holder ng-scope"]/ul/li/div/div/h3/span/span/img
+
+//*[@class="card-box__card-img"]//*
+
+
+
+
+כפתור בגרף תצוגה שנתית
+//div[@class="dashboard__chart-panel"]/header/div[2]/p/a[2]
+
+
+//*[@class="dashboard__chart-header-tab "]
+
+
+
+
+עמודה בגרף
+//div[@class="dashboard__chart-panel"]/div
+
+
+//*[@class="nv-group nv-series-0"]//*[@class="nv-bar positive hover"]
+
