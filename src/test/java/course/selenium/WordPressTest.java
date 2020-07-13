@@ -1,4 +1,8 @@
 package course.selenium;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,6 +16,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class WordPressTest {
 
@@ -60,30 +65,66 @@ public class WordPressTest {
 		driver.findElement(By.xpath("//div[text()='Dashboard']")).click();
 	}
 
-	@Test
+
+
+	// exercise 3(Homework lesson3):
+
+	@Test 
+	public void CheckLastPost () throws InterruptedException {
+		Thread.sleep(5000);
+		String postTitle = "Hello world!";
+		// Click on Posts
+		driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']")).click();
+		Thread.sleep(5000);
+
+		// Get the entire table
+		WebElement allPosts = driver.findElement(By.id("the-list"));
+
+		List<WebElement> postNames = allPosts.findElements(By.xpath("(.//tr)//td//strong//a"));
+
+		boolean found = false;
+		int index = 0;
+		for (WebElement element : postNames) {
+			if (element.getText().equals(postTitle) && index == postNames.size()-1) {
+				found = true;
+				System.out.println(" 'Hello World!' is the last post");
+				break;
+			}
+			index++;
+		}
+
+	}
+
+	// Homework lesson 4 (2.7)
+	@Test 
 	public void AddNewPost () throws InterruptedException {
 
 		// Logging
-		System.out.println("In Test");
-
+		System.out.println("In Test - Add new post");
+		String postTitle = "My Post Title :)" + System.currentTimeMillis();
 
 		// Click on Posts
 		driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/ul/li[3]/a")).click();
 		Thread.sleep(2000);
+
 		// Click on 'Add New' button
 		driver.findElement(By.xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[4]/a")).click();
 		Thread.sleep(2000);
+
 		driver.findElement(By.id("title")).sendKeys("I <3 ISRACARD");
 		Thread.sleep(2000);
+
 		driver.findElement(By.id("content")).sendKeys("Hello, my name is Shraga and i love Isracard!");
 		// click on publish
 		Thread.sleep(2000);
+
 		// Cancel the hidden menu if the button is not clicked
 		WebElement sideButton = driver.findElement(By.id("qt_content_dfw"));
 		if (sideButton.getAttribute("class").contentEquals("ed_button qt-dfw active")) {
 			sideButton.click();
 		}
 		Thread.sleep(2000);
+
 		// Click on publish
 		driver.findElement(By.id("publish")).click();
 		Thread.sleep(5000);
@@ -92,11 +133,67 @@ public class WordPressTest {
 
 		Thread.sleep(2000);
 		// check if the post published
-		WebElement postTitle = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[4]/form[1]/table/tbody/tr[3]/td[1]/strong/a"));
-		WebElement author = driver.findElement(By.xpath("//*[@id=\"post-62\"]/td[2]/a"));
-		
-		assert(postTitle.getText().equals("I <3 ISRACARD") && author.getText().equals("admin"));
-		System.out.println(postTitle.getText());
+		// Get the entire table
+
+		WebElement allPosts = driver.findElement(By.id("the-list"));
+
+		List<WebElement> postNames = allPosts.findElements(By.xpath("(.//tr)//td//strong//a"));
+
+		boolean found = false;
+		for (WebElement element : postNames) {
+			if (element.getText().contentEquals(postTitle)) {
+				found = true;
+				break;
+			}
+			
+		}
+		assertTrue(found);
+
+	}
+
+	// Class workout 12.7
+	@Test
+	public void AddNewTag () throws InterruptedException {
+
+		// Logging
+		System.out.println("In Test2- Add new tag");
+		Thread.sleep(2000);
+
+		String TagTitle = "My new tag" + System.currentTimeMillis();
+
+		// Click on Posts
+		driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/ul/li[3]/a")).click();
+		Thread.sleep(2000);
+
+		// Click on Tags
+		driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/ul/li[3]/ul/li[5]/a")).click();
+		Thread.sleep(2000);
+
+		// Add name
+		driver.findElement(By.id("tag-name")).sendKeys(TagTitle);
+		Thread.sleep(2000);
+
+		// Add slug
+		driver.findElement(By.id("tag-slug")).sendKeys(TagTitle);
+		Thread.sleep(2000);
+
+		// Add description
+		driver.findElement(By.id("tag-description")).sendKeys("Bla Bla Bla");
+		Thread.sleep(2000);
+
+		// submit
+		driver.findElement(By.id("submit")).click();
+		Thread.sleep(5000);
+
+		// Delete
+		driver.findElement(By.id("tag-search-input")).sendKeys(TagTitle);
+		Thread.sleep(2000);
+		driver.findElement(By.id("search-submit")).click();
+		Thread.sleep(2000);
+		Select drpAction = new Select (driver.findElement(By.id("bulk-action-selector-top")));
+		drpAction.selectByVisibleText("Delete");
+		Thread.sleep(2000);
+
 	}
 
 	@AfterAll

@@ -1,5 +1,6 @@
+//Homework lesson1
 /**
- * Selenium WebDriver course code samples.
+* Selenium WebDriver course code samples.
  * June 202, 
  * @author Nir Gallner
  */
@@ -20,7 +21,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *			
  */
 public class GoodMorningTest {
-	static WebDriver driver; //היה שם ארור שזה חייב להיות סטטי
+	static WebDriver driver; //הייתה שם ארור שזה חייב להיות סטטי
 	
 	@BeforeAll
 	public static void beforeAll() {
