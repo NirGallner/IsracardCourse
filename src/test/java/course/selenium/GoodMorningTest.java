@@ -39,15 +39,18 @@ public class GoodMorningTest {
 		System.out.println("In Test 2");
 	}
 
-	@AfterAll
-
-	public static void CloseWebDriver() {
-		driver.close();		
-}	
+	
 	@Test
 	public void test3() {
 		driver.get("http://demosite.center/wordpress/wp-login.php");
 		WebElement e = driver.findElement(By.id("user_login"));
 		e.sendKeys("ekedmi");
 	}
+	
+	@AfterAll
+
+	public static void CloseWebDriver() {
+		driver.close();		
+}	
+	
 }

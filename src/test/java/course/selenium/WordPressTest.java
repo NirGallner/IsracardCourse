@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -140,7 +141,7 @@ public void AddNewPosts() throws InterruptedException {
 	
 }
 
-	@Test
+//	@Test
 	public void CheckNewPost() throws InterruptedException {
 // go to post		
 		WebElement postElement = driver.findElement(By.id("menu-posts"));

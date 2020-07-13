@@ -28,7 +28,7 @@ public class EtiTest {
 			passwordelement.sendKeys("demo123");
 			driver.findElement(By.id("wp-submit")).click();
 			Thread.sleep(7000);
-			//WebElement e = driver.findElement(By.xpath("/html/body/div[1]/div[2]/div[2]/div[1]/div[4]/h1"));
+			
 			WebElement dashbordelement = driver.findElement(By.tagName("h1"));
 			String text = dashbordelement.getText();
 			System.out.println(text);

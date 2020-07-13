@@ -1,0 +1,17 @@
+
+
+"האיזור האישי"- //*[@class="page-title"]
+
+"כל החשבונות" - //*[@title="כל החשבונות"]
+
+"חיוב קרוב" - //span[contains(@ng-if,"NextBillingDate")]//span[contains(@class,"before")]
+	//span[contains(@ng-if,"NextBillingDate")]//span[contains(@class,"after")]
+
+"חיוב קודם" - //span[contains(@ng-if,"LastBillingDate")]//span[contains(@class,"before")]
+	//span[contains(@ng-if,"LastBillingDate")]//span[contains(@class,"after")]
+
+	
+כוללני יותר - //span[contains(@ng-if,"LastBillingDate")]
+
+"יתרה לניצול" - //*[@ class = "card-box__card-info-text card-box__card-info-text--bolded"]
+

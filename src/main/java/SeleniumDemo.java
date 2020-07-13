@@ -17,6 +17,7 @@ public class SeleniumDemo {
 		// Create a new ChromDriver instance
 		WebDriver driver = new ChromeDriver();
 		
+		
 		// Get google
 		driver.get("http://www.google.com");
 		
