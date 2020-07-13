@@ -3,6 +3,8 @@ package course.selenium;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -52,27 +54,27 @@ public class itzikHomeWork {
 	static void tetsEnd() {
 		Assertions.assertTrue(driver.findElement(By.id("footer-thankyou")).isDisplayed());
 		System.out.println("Test Cycle Ended succesfuly");
-		driver.quit();
+		//driver.quit();
 	}
 
 	@Test
-	public void testOne() {
+	public void locatorsTest() {
 		WebElement f = driver.findElement(By.id("title"));
 		f.sendKeys("Test one Completed ");
-
-	}
-
-	@Test
-	public void testTwo() {
+		System.out.println("Test one Completed ");
 		WebElement g = driver.findElement(By.className("mceEditor"));
 		g.sendKeys("Test two Completed ");
-
-	}
-	@Test
-	public void testThree() {
-		WebElement search = driver.findElement(By.xpath("//*[@id=\"welcome-panel\"]/div/div/div[1]/a[1]"));
+		System.out.println("Test two Completed");
+		driver.findElement(By.xpath("//*[@id=\"welcome-panel\"]/div/div/div[1]/a[1]"));
 		//search.click();
-		System.out.println("test 3 done");
+		System.out.println("Test Three Completed");
+		driver.findElement(By.cssSelector(".textarea-wrap"));
+		System.out.println("Css Test Completed");
+		driver.findElement(By.linkText("View your site"));
+		System.out.println("Test Five Completed");
+		driver.findElement(By.tagName("span"));
+		System.out.println("Tag Name Test Completed");
+
 	}
 
 	@Test
@@ -106,7 +108,6 @@ public class itzikHomeWork {
 		postTitle.sendKeys("Itzik Post ");
 		WebElement postContent = driver.findElement(By.id("content"));
 		postContent.sendKeys("Itzik Post ");
-
 		WebElement publish = driver.findElement(By.id("publish"));
 		publish.click();
 		System.out.println("post published");
@@ -118,9 +119,59 @@ public class itzikHomeWork {
 		driver.findElement(By.partialLinkText("Itzik")).click();
 		Thread.sleep(5000);
 		System.out.println("done class4 HW");
+
+	}
+	@Test
+	public void saveDraft() throws InterruptedException {
+		WebElement post = driver.findElement(By.xpath("//*[@id=\"menu-posts\"]/a/div[2]"));
+		new Actions(driver).moveToElement(post).perform();
+		post.click();
+		Thread.sleep(5000);
+		WebElement addpost = driver.findElement(By.xpath("//*[@id=\"wpbody-content\"]/div[4]/a"));
+		addpost.click();
+		Thread.sleep(5000);
+		WebElement postTitle = driver.findElement(By.id("title"));
+		postTitle.sendKeys("Itzik Draft");
+		WebElement saveDraft = driver.findElement(By.id("save-post"));
+		saveDraft.click();
+		System.out.println("Draft Saved");
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']")).click();
+		WebElement allPosts = driver.findElement(By.id("the-list"));
+		assertTrue(postTitle.equals("Itzik Draft"), "draft not found");
+		Thread.sleep(5000);
+		System.out.println("done class4 Updated HW");
+
 	}
 
+	@Test
+	public void AddTag() throws InterruptedException {
+		WebElement posts = driver.findElement(By.xpath("//*[@id=\"menu-posts\"]/a/div[2]"));
+		new Actions(driver).moveToElement(posts).perform();
+		Thread.sleep(5000);
+		WebElement findTag = driver.findElement(By.xpath("//*[@id=\"menu-posts\"]/ul/li[5]/a"));
+		findTag.click();
+		Thread.sleep(5000);
+		WebElement TagName = driver.findElement(By.id("tag-name"));
+		String postTag = "This is itzik tag" + System.currentTimeMillis();
+		TagName.sendKeys(postTag);
+		driver.findElement(By.id("submit")).click();
+		Thread.sleep(5000);
+
+		WebElement allTags = driver.findElement(By.xpath("//*[@id=\"posts-filter\"]/table"));
+		List<WebElement> tagList = allTags.findElements(By.xpath("//*[@id=\"posts-filter\"]/table"));
+
+		boolean found = false;
+		for (WebElement element : tagList) {
+			if (element.getText().contentEquals(postTag)) {
+				found = true;
+				System.out.println("found tag");
+				break;
+
+			}
+
+
+		}
+	}
 
 }
-
-
