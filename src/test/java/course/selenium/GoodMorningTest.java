@@ -5,6 +5,8 @@
  */
 package course.selenium;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -24,5 +26,7 @@ public class GoodMorningTest {
 	public void test2() {
 		System.out.println("In Test 2");
 	}
+	
+	
 
 }
