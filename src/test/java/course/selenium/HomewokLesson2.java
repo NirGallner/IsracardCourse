@@ -61,7 +61,6 @@ public class HomewokLesson2 {
 	 *  3. //span[@class=‘links-name’]
 	 *  4. //img[@id=‘LayoutLogoImage’]
 	 *  5. //*[contains(@src,’/globalassets/isracard/home-page---new/icons/money.png’)
-	 *  
 	 */
 	
 	
