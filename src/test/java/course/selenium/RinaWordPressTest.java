@@ -40,7 +40,7 @@ public class RinaWordPressTest {
 		}
 
 		
-		@Test
+	/*	@Test
 		public void AddNewTag() throws InterruptedException {
 			//Go to post
 			WebElement PostElement = driver.findElement(By.id("menu-posts"));
@@ -79,7 +79,7 @@ public class RinaWordPressTest {
 			//assertTrue(tagName.contentEquals(tagTitle));
 			Thread.sleep(5000);
 			
-		}
+		}*/
 		
 		
 		/*@Test
@@ -126,16 +126,16 @@ public class RinaWordPressTest {
 		}*/
 			
 		
-		@Test
-		public void AddNewPost() throws InterruptedException{
-			
+		
+	/*	@Test
+		public void AddNewPostAndPublish() throws InterruptedException{
 			
 			String PostTitle = "Rina-This is my post title" + System.currentTimeMillis();
 			
 			//Go to post
 			WebElement PostElement = driver.findElement(By.id("menu-posts"));
 			new Actions(driver).moveToElement(PostElement).perform();
-			Thread.sleep(2000);
+			Thread.sleep(4000);
 			
 			//Go to add new post
 			WebElement AddNewElement = driver.findElement(By.xpath("//*[@href=\"post-new.php\"]"));
@@ -165,9 +165,62 @@ public class RinaWordPressTest {
 	 		String PostName=ListPost.findElement(By.xpath("(.//tr)//a")).getText();
 				
 			assertTrue(PostName.contentEquals(PostTitle));
+			Thread.sleep(5000);
+		}*/
+	
+		
+		
+		@Test
+		public void AddNewPostAndSave() throws InterruptedException{
 			
+			System.out.println("I go to posts");
+			
+			//String PostTitle = "Rina-This is my post title" + System.currentTimeMillis();
+			
+			//Go to post
+			WebElement PostElement = driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']"));
+			new Actions(driver).moveToElement(PostElement).perform();
+			Thread.sleep(4000);
+			
+			
+			//Go to add new post
+			WebElement AddNewElement = driver.findElement(By.xpath("//*[@href=\"post-new.php\"]"));
+			Thread.sleep(2000);
+			new Actions(driver).moveToElement(AddNewElement).click().perform();
+			Thread.sleep(2000);
+			
+			//Write the title of post
+			 driver.findElement(By.name("post_title")).sendKeys("Rina-This is my post title");
+			Thread.sleep(7000);
+			
+			//Write the content of post
+			WebElement AddContentPost = driver.findElement(By.id("content"));
+			AddContentPost.sendKeys("Rina-This is my post content");
 			Thread.sleep(5000);
 			
+			
+			//Click the save button
+			WebElement SubmitPost = driver.findElement(By.id("submitdiv"));
+			SubmitPost.click();
+			Thread.sleep(2000);
+			WebElement SavePost = driver.findElement(By.id("save-post"));
+			SavePost.click();
+			
+			
+			//Go to post list
+		 	WebElement AllPostElement = driver.findElement(By.xpath("//*[@href='edit.php']//*[@class='wp-menu-name']"));
+			AllPostElement.click();			
+			WebElement ListPost = driver.findElement(By.id("the-list"));
+	 		//String PostName=ListPost.findElement(By.xpath("(.//tr)//a")).getText();
+			
+	 		//Verify my title post
+			//assertTrue(PostName.contentEquals(PostTitle));
+			Thread.sleep(5000);
+			
+			//Verify the Draft
+			String PostState = ListPost.findElement(By.xpath("(.//tr)//td//strong//span")).getText();
+			assertTrue(PostState.contentEquals("Draft"));
+						
 		}
 	
 }
