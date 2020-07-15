@@ -30,5 +30,13 @@
     		<version>2.1.0</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/object-keys -->
+		<dependency>
+		    <groupId>org.webjars.npm</groupId>
+		    <artifactId>object-keys</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		
+		
 	</dependencies>
 </project>

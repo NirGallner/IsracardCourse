@@ -31,19 +31,33 @@ static WebDriver driver;
 	public void AddNewTag () throws InterruptedException
 	{
 		String TagTitle = "My new Tag" + System.currentTimeMillis();
+
+		//Find posts page
 		WebElement posts = driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']"));
-		new Actions(driver).moveToElement(posts).perform();;
+		
+		//Go to post page 
+		new Actions(driver).moveToElement(posts).perform();
+		
+		//Go to Tags page
 		driver.findElement(By.linkText("Tags")).click();
 		Thread.sleep(5000);
+		
+		//Add a new Tag- title
 		driver.findElement(By.xpath("//*[@id='tag-name']")).sendKeys(TagTitle);
+		
+		//Add a new Tag- slug
 		driver.findElement(By.xpath("//*[@id='tag-slug']")).sendKeys(TagTitle);
 		Thread.sleep(1000);
+		
+		//Add a new Tag- body
 		driver.findElement(By.xpath("//*[@id='tag-description']")).sendKeys("Tag body bla bla bla");
 		Thread.sleep(1000);
+		
+		//Submit and create the tag
 		driver.findElement(By.id("submit")).click();
 		Thread.sleep(5000);
 		
-		//Find the new Tag
+		//Search my new tag
 		driver.findElement(By.id("tag-search-input")).sendKeys(TagTitle);
 		driver.findElement(By.id("search-submit")).click();
 		Thread.sleep(5000);
