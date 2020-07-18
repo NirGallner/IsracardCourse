@@ -5,6 +5,7 @@
  */
 package course.selenium;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Time;
@@ -21,6 +22,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import isracard.DashboardPage;
+import isracard.LoginPage;
 
 /**
  * Test class of Word Press demo site
@@ -49,10 +55,13 @@ public class WordPressTest {
 		driver.get("http://demosite.center/wordpress/wp-login.php");
 
 		// Login
-		driver.findElement(By.id("user_login")).sendKeys("admin");
-		driver.findElement(By.id("user_pass")).sendKeys("demo123");
-		driver.findElement(By.id("wp-submit")).click();
-		Thread.sleep(9000);
+//		WebElement userName = driver.findElement(By.id("user_login"));
+//		userName.sendKeys("admin");
+//
+//		driver.findElement(By.id("user_pass")).sendKeys("demo123");
+//		driver.findElement(By.id("wp-submit")).click();
+//		Thread.sleep(9000);
+
 	}
 
 	@BeforeEach
@@ -62,8 +71,8 @@ public class WordPressTest {
 		System.out.println("In before each");
 
 		// If we are not on the dashboard page - click on it
-		if (driver.getTitle().contains("Dashboard") == false)
-			driver.findElement(By.xpath("//div[text()='Dashboard']")).click();
+//		if (driver.getTitle().contains("Dashboard") == false)
+//			driver.findElement(By.xpath("//div[text()='Dashboard']")).click();
 
 	}
 
@@ -75,7 +84,7 @@ public class WordPressTest {
 
 	}
 
-	 @Test
+	@Test
 	public void inDashboardPage() {
 
 		// Check if the title contains the word - Dashboard
@@ -83,7 +92,7 @@ public class WordPressTest {
 		assertTrue(pageTitle.contains("Dashboard"), "Dashboard should appear in title");
 	}
 
-	 @Test
+	@Test
 	public void lastPost() {
 
 		// Goto posts list
@@ -104,7 +113,7 @@ public class WordPressTest {
 	public void newPost() throws InterruptedException {
 
 		String postTitle = "My Post Title " + System.currentTimeMillis();
-		
+
 		// Post element
 		WebElement posts = driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']"));
 
@@ -118,23 +127,25 @@ public class WordPressTest {
 		driver.findElement(By.xpath("//*[@id='titlewrap']//input")).sendKeys(postTitle);
 
 		// Body
+		Thread.sleep(10000);
 		driver.findElement(By.xpath("//*[@id='postdivrich']//textarea")).sendKeys("My post body");
 
 		// submit
 		Thread.sleep(3000);
-		driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']")).click();
+		// driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']")).click();
 
 		// for example
-		//		WebElement submit = driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']"));
-		//		submit.click();
+		driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']")).click();
+		;
 
 		// Wait for update
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 
 		// submitted?
+		// WebElement submit =
 		WebElement submit = driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']"));
 		assertTrue(submit.getAttribute("value").equalsIgnoreCase("update"));
-		
+
 		// Goto list of posts
 		driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']")).click();
 
@@ -144,7 +155,7 @@ public class WordPressTest {
 		WebElement allPosts = driver.findElement(By.id("the-list"));
 
 		List<WebElement> postNames = allPosts.findElements(By.xpath("(.//tr)//td//strong//a"));
-		
+
 		boolean found = false;
 		for (WebElement element : postNames) {
 			if (element.getText().contentEquals(postTitle)) {
@@ -154,19 +165,19 @@ public class WordPressTest {
 		}
 		// Get the text of the oldest post
 		// String postName = allPosts.findElement(By.xpath("(.//tr)//a")).getText();
-		
+
 		// assertTrue(postName.contentEquals(postTitle));
-		assertTrue(found);
-		
+		assertTrue(found, "The title was not found");
+
 		Thread.sleep(5000);
 
 	}
-	
+
 	@Test
 	public void newPostInitial() throws InterruptedException {
 
 		String postTitle = "My Post Title " + System.currentTimeMillis();
-		
+
 		// Post element
 		WebElement posts = driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']"));
 
@@ -186,14 +197,13 @@ public class WordPressTest {
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']")).click();
 
-		
 		// Wait for update
 		Thread.sleep(3000);
 
 		// submitted?
 		WebElement submit = driver.findElement(By.xpath("//*[@id='publishing-action']//input[@type='submit']"));
 		assertTrue(submit.getAttribute("value").equalsIgnoreCase("update"));
-		
+
 		// Goto list of posts
 		driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']")).click();
 
@@ -202,15 +212,76 @@ public class WordPressTest {
 		// Get the entire table
 		WebElement allPosts = driver.findElement(By.id("the-list"));
 
-		
 		// Get the text of the oldest post
 		String postName = allPosts.findElement(By.xpath("(.//tr)//a")).getText();
-		
+
 		// assertTrue(postName.contentEquals(postTitle));
 		assertTrue(postName.contentEquals(postTitle));
-		
+
 		Thread.sleep(5000);
 
+	}
+
+	@Test
+	public void addDeleterTag() throws InterruptedException {
+		
+		String tagTitle = "My Tag Title " + System.currentTimeMillis();
+
+		// Post element
+		WebElement posts = driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']"));
+
+		// Hover
+		new Actions(driver).moveToElement(posts).perform();
+
+		// Click on new post
+		driver.findElement(By.linkText("Tags")).click();
+
+		driver.findElement(By.id("tag-name")).sendKeys(tagTitle);
+		driver.findElement(By.id("tag-slug")).sendKeys("my slug");
+		driver.findElement(By.id("tag-description")).sendKeys("my description");
+
+		driver.findElement(By.id("submit")).click();
+
+		Thread.sleep(3000);
+
+		List<WebElement> allTags = driver.findElements(By.xpath("//*[@id='posts-filter']//table//strong"));
+
+		WebElement foundTag = null;
+		for (WebElement tag : allTags) {
+			if (tag.getText().contentEquals(tagTitle)) {
+				foundTag = tag;
+				break;
+			}
+		}
+
+		assertNotNull(foundTag, "The tag was not found on the list");
+
+		// If we are here, then the tag was found
+
+		Thread.sleep(14000);
+		WebElement forId = driver.findElement(By.xpath("//*[contains(text(),'Select " + tagTitle + "')]"));
+		String id = forId.getAttribute("for");
+		driver.findElement(By.id(id)).click();
+
+		Select select = new Select(driver.findElement(By.id("bulk-action-selector-top")));
+		select.selectByVisibleText("Delete");
+
+		// Apply
+		driver.findElement(By.id("doaction")).click();
+
+	}
+	
+	@Test
+	public void LoginTest() {
+		// validation
+		assertTrue(LoginPage.isOnPage((WebDriver)driver));
+		
+		// Login
+		 LoginPage login = new LoginPage((WebDriver)driver);
+		DashboardPage dashboard =  login.withUsername("admin").withPassword("demo123").submit();
+		
+		
+		
 	}
 
 	@AfterAll
