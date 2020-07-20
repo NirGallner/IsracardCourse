@@ -2,7 +2,6 @@ package course.selenium;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.DynamicTest.stream;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.omg.CORBA.portable.ValueBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -229,7 +227,7 @@ public class LironTestWordPress {
 			}
 		}
 
-		assertTrue(check);
+		assertTrue(check); 
 
 		Thread.sleep(2000);
 		
