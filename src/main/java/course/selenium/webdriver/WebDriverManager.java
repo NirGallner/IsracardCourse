@@ -1,4 +1,4 @@
-package webdriver.course.selenium;
+package course.selenium.webdriver;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;

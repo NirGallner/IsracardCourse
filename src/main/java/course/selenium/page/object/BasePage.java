@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import webdriver.course.selenium.WebDriverManager;
+import course.selenium.webdriver.WebDriverManager;
 
 public class BasePage extends WebDriverManager{
 

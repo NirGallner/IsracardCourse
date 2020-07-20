@@ -8,8 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import course.selenium.page.object.BasePage;
-
-import webdriver.course.selenium.WebDriverManager;
+import course.selenium.webdriver.WebDriverManager;
 
 public class PoWordPressTest {
 	private static WebDriver driver;
