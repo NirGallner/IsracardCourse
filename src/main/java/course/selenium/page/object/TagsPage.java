@@ -7,11 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TagsPage extends BasePage{
-
-	//private WebDriver driver;
 
 	@FindBy(id = "tag-name")
 	private WebElement tagName;
@@ -24,13 +24,10 @@ public class TagsPage extends BasePage{
 
 	@FindBy(id = "submit")
 	private WebElement submit;
-	
+
 	@FindBy(id= "doaction")
 	private WebElement apply; 
 	
-	private int listSizeBeforSubmit;
-	private int indexOfNewTag = 0;
-	private boolean tagDeleted = false; 
 
 	public TagsPage(WebDriver driver) {
 		super(driver);
@@ -47,65 +44,64 @@ public class TagsPage extends BasePage{
 		return this;
 	}
 
-	public void submit(){
-		listSizeBeforSubmit = listSize();
+	public TagsPage submit(){
 		submit.click();
+		return this;
 	}
 
-
-	public int listSize () {
-		List<WebElement> tagsList = driver.findElements(By.xpath ("//table//*[@class='row-title']"));
+	//get the list size 
+	public int getListSize () {
+		List<WebElement> tagsList = getListOfTags();
 		return tagsList.size();
 	}
 
-	public boolean searchTagInList (String tagName) {
-		//initilaize the list with current WebElements
-		List<WebElement> tagsList = driver.findElements(By.xpath ("//table//*[@class='row-title']"));;
-		
-		boolean validationOfTagName = false;
-		boolean checkListSize = false;
-		
-		while (!checkListSize) {
 
-			if (listSize() <= listSizeBeforSubmit && !tagDeleted ){
-				checkListSize = false;
-			}
-
-			else if((listSize() > listSizeBeforSubmit) || tagDeleted ) {
-				//get the new list with the added tag 
-				tagsList = driver.findElements(By.xpath ("//table//*[@class='row-title']"));;
-				checkListSize = true;
-				validationOfTagName = false;
-				
-				//go over the list and search the new added tag
-				for (WebElement tags : tagsList) { 
-					if (tags.getText().contentEquals(tagName)) {
-						indexOfNewTag = tagsList.indexOf(tags);				
-						validationOfTagName = true;
-						break;
-					} else validationOfTagName = false;
-				}	
-			}
-		}
-		//return true only if the new tag found on the list
-		return validationOfTagName;
+	public List<WebElement> getListOfTags() {
+		 List<WebElement> tagsList = driver.findElements(By.xpath ("//table//*[@class='row-title']"));
+		 return tagsList;
 	}
 	
-	public void deleteTag() {
+
+	//search a tag name in the list and return its index in the list
+	public int searchTagInList(String tagName) {	
+		List<WebElement> tagsList = getListOfTags();
+		int indexOfNewTag = 0;
+
+		//go over the list and search the new added tag
+		for (WebElement tags : tagsList) { 
+			if (tags.getText().contentEquals(tagName)) {
+				indexOfNewTag = tagsList.indexOf(tags);				
+				break;
+			} 
+			else  indexOfNewTag = -1;
+			break;
+		}	
+
+		return indexOfNewTag;
+	}
+	
+	public int searchTagNameAfterNewAdded( int listSizeBeforeSubmit, String tagName) {
+		
+		WebDriverWait wait = new WebDriverWait(driver, 3000);
+		wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath ("//table//*[@class='row-title']"), listSizeBeforeSubmit));
+		
+		int indexOfFoundedTag = searchTagInList(tagName);
+		return indexOfFoundedTag;
+	}
+
+	public void deleteTag(String tagName, int indexOfNewTag) {
+		
 		List<WebElement> tagCheckbox = driver.findElements(By.xpath("//*[@class= 'check-column']/input"));
 		tagCheckbox.get(indexOfNewTag).click();;
-		
+
 		Select select = new Select(driver.findElement(By.id("bulk-action-selector-top")));
 		select.selectByVisibleText("Delete");
-		
-		tagDeleted = true;
-		
+
 		apply.click();
 	}
-	
+
 	public boolean tagMessage(String messageToCheck) {
 		WebElement message = driver.findElement(By.xpath("//*[@id='message']//p"));
 		return message.getText().equalsIgnoreCase(messageToCheck);
 	}
 }
- 
