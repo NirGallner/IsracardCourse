@@ -1,5 +1,7 @@
 package course.selenium;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -9,11 +11,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import pageObject.LoginPage;
+
 public class GoToTagsTest
+
 {
+	}
 	
 	
-	static WebDriver driver;
+	
+	
+/*	static WebDriver driver;
 	 
 	@BeforeAll
 	public static void start() throws InterruptedException
@@ -67,5 +75,5 @@ public class GoToTagsTest
 		CategoriesDropDown.selectByVisibleText("Uncategorised");
 		driver.findElement(By.id("post-query-submit")).click();
 		
-	}
+	}*/
 }
