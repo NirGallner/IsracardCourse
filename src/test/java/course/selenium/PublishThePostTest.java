@@ -70,7 +70,7 @@ class PublishThePostTest {
 			System.out.println("size of posts : " + posts.size());
 		} 
 		
-		
+		@Disabled
 		@Test
 		public void createPost() throws InterruptedException {
 			driver.findElement(By.linkText("Posts")).click();
@@ -124,7 +124,7 @@ class PublishThePostTest {
 			}
 		}
 			
-	    	@Disabled
+	    	
 			@Test
 			public void createDraft() throws InterruptedException {
 				driver.findElement(By.linkText("Posts")).click();

@@ -56,11 +56,7 @@ public class MarinaTest {
 	
 	}
 	
-	@AfterAll
-	public static void afterAll() {
-		// close the driver
-		driver.quit();	
-	}
+	
 	
 
 }
