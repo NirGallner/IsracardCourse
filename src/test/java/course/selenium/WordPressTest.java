@@ -23,7 +23,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import isracard.DashboardPage;
 import isracard.LoginPage;
@@ -280,12 +283,13 @@ public class WordPressTest {
 		 LoginPage login = new LoginPage((WebDriver)driver);
 		DashboardPage dashboard =  login.withUsername("admin").withPassword("demo123").submit();
 		
-		
+		// New post
+		dashboard.gotoPostsPage();
 		
 	}
 
 	@AfterAll
-	public static void afterAll() {
+	public static void afterAll()  {
 
 		// Logging
 		System.out.println("In after all");
