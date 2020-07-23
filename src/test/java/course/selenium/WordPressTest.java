@@ -1,5 +1,9 @@
 package course.selenium;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import PageObject.DashboardPage;
+import PageObject.LoginPage;
+import PageObject.TagsPage;
+
 
 import java.util.List;
 
@@ -37,11 +41,12 @@ public class WordPressTest {
 		// Goto page
 		driver.get("http://demosite.center/wordpress/wp-login.php");
 
-		// Login
+		/* Login
 		driver.findElement(By.id("user_login")).sendKeys("admin");
 		driver.findElement(By.id("user_pass")).sendKeys("demo123");
 		driver.findElement(By.id("wp-submit")).click();
 		Thread.sleep(2000);
+		 */
 	}
 
 	@BeforeEach
@@ -65,7 +70,49 @@ public class WordPressTest {
 		driver.findElement(By.xpath("//div[text()='Dashboard']")).click();
 	}
 
+	@Test
+	public void LoginTest() {
+		
+		// validation
+		assertTrue(LoginPage.isOnPage((WebDriver)driver));
 
+		// Login
+		LoginPage login = new LoginPage((WebDriver)driver);
+		DashboardPage dashboard =  login.withUsername("admin").withPassword("demo123").submit();
+	}
+
+
+	@Test
+	public void inDashboardPage() {
+
+		// Check if the title contains the word - Dashboard
+		String pageTitle = driver.getTitle();
+		assertTrue(pageTitle.contains("Dashboard"), "Dashboard should appear in title");
+	}
+
+	@Test
+	public void addNewTag() {
+
+		// adding a new tag
+		
+		System.out.println("In test 'addNewTag'");
+
+		String TagTitle = "My new Tag" + System.currentTimeMillis();
+		
+		// Creates a new dashboard page
+		DashboardPage dashboard = new DashboardPage(driver);
+		dashboard.gotoTags();
+		
+		if(TagsPage.isOnTagsPage(driver) == true)
+		{
+			TagsPage tag = new TagsPage(driver);
+			tag.addTitle(TagTitle).addSlug(TagTitle).addBody("meow").addNewTag();
+			
+		}
+		else
+			System.out.println("Eror");
+	
+	}
 
 	// exercise 3(Homework lesson3):
 	/*
@@ -198,7 +245,7 @@ public class WordPressTest {
 		drpAction.selectByVisibleText("Delete");
 		Thread.sleep(2000);
 
-	}*/
+	}
 
 	// Homework lesson 5 (12.7, sunday)
 	@Test 
@@ -274,4 +321,5 @@ public class WordPressTest {
 		// Quit driver
 		driver.quit();
 	}
+	 */
 }
