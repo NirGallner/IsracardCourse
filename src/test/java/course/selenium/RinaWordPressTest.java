@@ -3,6 +3,7 @@ package course.selenium;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-public class RinaWordPressTest {
+
+/*public class RinaWordPressTest {
 	 
 		
 		public static WebDriver driver;
@@ -170,15 +172,13 @@ public class RinaWordPressTest {
 	
 		
 		
-		@Test
+	/*	@Test
 		public void AddNewPostAndSave() throws InterruptedException{
-			
-			System.out.println("I go to posts");
-			
-			//String PostTitle = "Rina-This is my post title" + System.currentTimeMillis();
+						
+			String PostTitle = "Rina-This is my post title" + System.currentTimeMillis();
 			
 			//Go to post
-			WebElement PostElement = driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']"));
+			WebElement PostElement = driver.findElement(By.id("menu-posts"));
 			new Actions(driver).moveToElement(PostElement).perform();
 			Thread.sleep(4000);
 			
@@ -202,7 +202,7 @@ public class RinaWordPressTest {
 			//Click the save button
 			WebElement SubmitPost = driver.findElement(By.id("submitdiv"));
 			SubmitPost.click();
-			Thread.sleep(2000);
+			Thread.sleep(10000);
 			WebElement SavePost = driver.findElement(By.id("save-post"));
 			SavePost.click();
 			
@@ -211,16 +211,16 @@ public class RinaWordPressTest {
 		 	WebElement AllPostElement = driver.findElement(By.xpath("//*[@href='edit.php']//*[@class='wp-menu-name']"));
 			AllPostElement.click();			
 			WebElement ListPost = driver.findElement(By.id("the-list"));
-	 		//String PostName=ListPost.findElement(By.xpath("(.//tr)//a")).getText();
+	 		String PostName=ListPost.findElement(By.xpath("(.//tr)//a")).getText();
 			
 	 		//Verify my title post
-			//assertTrue(PostName.contentEquals(PostTitle));
+			assertTrue(PostName.contentEquals(PostTitle));
 			Thread.sleep(5000);
 			
 			//Verify the Draft
 			String PostState = ListPost.findElement(By.xpath("(.//tr)//td//strong//span")).getText();
 			assertTrue(PostState.contentEquals("Draft"));
-						
-		}
+
+		}*/
 	
-}
+
