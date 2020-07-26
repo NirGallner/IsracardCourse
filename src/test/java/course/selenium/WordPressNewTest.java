@@ -32,23 +32,16 @@ public class WordPressNewTest {
 	}
 		
 	
+	
 	@Test
-	public void LoginTest() throws InterruptedException {
+	public void AddNewTag() throws InterruptedException {
 		driver.get("http://demosite.center/wordpress/wp-login.php");
 		driver.manage().window().maximize();
 		assertTrue(LoginPage.isOnPageLogin(driver));
 		LoginPage login = new LoginPage (driver);
 		DashboardPage dashboard = login.withUserName("admin").withPassword("demo123").submit();
 		assertTrue(dashboard.isOnPageDashboard("Dashboard ‹ Wordpress Demo Site at Demo.Center — WordPress" ));
-		//dashboard.GoToTagsPage();
-		
-		WebElement PostElement = driver.findElement(By.xpath("//*[@id='menu-posts']//*[@class='wp-menu-name']"));
-		new Actions(driver).moveToElement(PostElement).perform();
-		WebElement TagElement = driver.findElement(By.xpath("//*[@href=\"edit-tags.php?taxonomy=post_tag\"]"));
-		WebDriverWait wait = new WebDriverWait(driver, 3);
-		wait.until(ExpectedConditions.visibilityOf(PostElement));
-		new Actions(driver).moveToElement(TagElement).click().perform();
-		//wait.until(ExpectedConditions.visibilityOf(PostElement));
+		dashboard.GoToTagsPage();
 		
 		assertTrue(TagsPage.isOnPageTags(driver,"Tags"));
 		TagsPage tags = new TagsPage(driver);

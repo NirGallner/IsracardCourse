@@ -27,7 +27,6 @@ public class TagsPage {
 	}
 	
 	public static boolean isOnPageTags(WebDriver driver, String title) {
-		System.out.println(title);
 		return driver.getTitle().toLowerCase().contains(title.toLowerCase());
 		}
 	
@@ -43,7 +42,7 @@ public class TagsPage {
 	}
 	
 	public TagsPage withTagDescription (String tagDescription) {
-		tagSlugInput.sendKeys(tagDescription);
+		tagDescriptionInput.sendKeys(tagDescription);
 		return this;
 	}
 	
