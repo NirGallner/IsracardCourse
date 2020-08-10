@@ -7,17 +7,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-public class DashboardPage {
-	
-	private WebDriver driver;
-	
-	@FindBy(xpath="//*@id='menu-posts']//*[@class='wp-menu-name']")
-	private WebElement postLink;
-	
+/**
+ * dashboard page that extends the base page - includes all the relevant elements on dashboard page 
+ * @author marina
+ *
+ */
+public class DashboardPage extends BasePage {
 	
 	public DashboardPage (WebDriver driver) {
-		this.driver = driver;
+		super(driver);
 	}
 	/**
 	 * checks is the driver on dashboard page
@@ -27,13 +25,7 @@ public class DashboardPage {
 	public static boolean isOnPage(WebDriver driver) {
 		return driver.getTitle().contains("Dashboard");
 	}
-	/**
-	 * finds the Posts element and clicks on it 
-	 */
-	public void gotoPosts() {
-		WebDriverWait wait = new WebDriverWait(driver,30);
-		wait.until(ExpectedConditions.invisibilityOf(postLink));
-		postLink.click();
+	
 	}
 	
 	
@@ -53,4 +45,4 @@ public class DashboardPage {
 	
 	  
 
-}
+

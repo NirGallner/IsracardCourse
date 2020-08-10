@@ -80,7 +80,7 @@ class newTagTest {
 			List <WebElement> tagsTitles = tagsList.findElements(By.xpath("(.//table)//strong"));
 			System.out.println("size of tags : " + tagsTitles.size());
 			
-			WebElement pullId = driver.findElement(By.xpath("//*[contains(text(),'Select "+ theTag + "')]"));
+			WebElement pullId = driver.findElement(By.xpath("//*[contains(text(),'Select "+ theTag+ "')]"));
 			String id = pullId.getAttribute("for");
 			driver.findElement(By.id(id)).click();
 			
@@ -90,7 +90,8 @@ class newTagTest {
 			driver.findElement(By.id("doaction")).click();
 //			boolean found = false;   //This section fails in recognition the tag title 
 //			for (WebElement tag : tagsTitles) {
-//				
+//			////*[@id="tag-2"]/th	
+			//html/body/div[1]/div[2]/div[2]/div[1]/div[4]/div[3]/div[2]/div/form/table/tbody/tr/th
 //				if (tag.getText().contentEquals(theTag)) {
 //					System.out.println(tag.getText());
 //					found = true;

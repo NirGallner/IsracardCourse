@@ -25,3 +25,4 @@ pom_REMOTE_25200.xml
 pom_LOCAL_25200.xml
 pom_BASE_25200.xml
 pom_BACKUP_25200.xml
+*.log
