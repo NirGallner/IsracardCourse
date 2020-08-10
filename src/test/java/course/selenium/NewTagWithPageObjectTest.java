@@ -1,6 +1,7 @@
 package course.selenium;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.commons.exec.LogOutputStream;
 import org.junit.jupiter.api.AfterEach;
@@ -43,6 +44,7 @@ public class NewTagWithPageObjectTest {
 		LoginPage login = new LoginPage(driver);
 		login.withUsername("admin").withPassword("demo123").submit(driver);
 		
+		
 	}
 	
 	@BeforeEach
@@ -51,7 +53,7 @@ public class NewTagWithPageObjectTest {
 		
 		//Check if the Dashboard page is open
 		if(DashboardPage.isInDashboardPage(driver) == false)
-			driver.findElement(By.xpath("//div[text()='Dashboard']")).click();;
+			driver.findElement(By.xpath("//div[text()='Dashboard']")).click();
 	}
 	
 	
