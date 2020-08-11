@@ -25,6 +25,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ChargesPage extends BaseIsracardPage {
 	
+	
+
 	@FindBy (xpath = "//*[@class=\"nonprint-landscape-a4\"]//*[@ng-show=\"dc.ShowBillingTypes\"]//*[@title=\"כל המועדים\"]" )
 	private WebElement moedCombo;
 	
@@ -40,7 +42,6 @@ public class ChargesPage extends BaseIsracardPage {
 	@FindBy (xpath = "//*[@class=\"nonprint-landscape-a4\"]//button[@class=\"btn btn-default\"]")
 	private WebElement calenderButton;
 	
-	//private WebDriver driver;
 	
 	public ChargesPage(WebDriver driver) {
 		super (driver);
@@ -48,10 +49,23 @@ public class ChargesPage extends BaseIsracardPage {
 	}
 
 
-	public static boolean isOnPage(WebDriver driver) {
-		return driver.getTitle().contains("חיובים");
+	public void  isOnPageCharget(WebDriver driver) {
+		
+		WebDriverWait wait = new WebDriverWait(driver,20);
+
+		try {
+			wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//*[@class=\\\"nonprint-landscape-a4\\\"]//*[@ng-show=\\\"dc.ShowBillingTypes\\\"]//*[@title=\\\"כל המועדים\\\"]"))));
+		}catch (Exception e) {}
+
+		assertTrue((driver.getTitle().contains("חיובים")),"No Details Charges page found");
 	}
 	
+	
+	
+	/**
+	 * open on the comboBox and click on the list
+	 * 
+	 */
 	
 	public void selectMoed() {
 		
@@ -61,17 +75,14 @@ public class ChargesPage extends BaseIsracardPage {
 		
 		// Click on the comboBox
 		moedCombo.click();
-		//monthLink.click();
 		
 		String textMoed;
 	
 		// Go over on the List opens in the comboBox
 		List <WebElement> allLink = moedCombo.findElements(By.xpath("ul[@class=\"ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope\"]"));
-		//*[@id="ui-select-choices-3"]
 		
 		for (WebElement element:allLink) {
 			
-			System.out.println("dir");
 			
 			// Wait for list
 			WebDriverWait waitList = new WebDriverWait(driver, 9);
@@ -79,34 +90,25 @@ public class ChargesPage extends BaseIsracardPage {
 			//waitList.until(ExpectedConditions.visibilityOfAllElements(allLink));
 			
 			
-			System.out.println(element.getText());
-			
 			textMoed = element.getText();
-			
-			
-//		    System.out.println("textMoed "+textMoed);
-//		    String  next = nextCharge.getText();
-//		    System.out.println("next "+next);
-		  //  String  previou = previousCharge.getText();
-		  //  System.out.println("previou "+previousCharge);
-		    
+				  
 			// Click on the element in the list
 			element.click();
 			
 			// call to function that check if the title match the selection from the list
-			//System.out.println(textMoed+" 444");
 			isTitle(textMoed);
 			
 		}
 		
 	}
+	
 
-	/*
-	 * isTitle void function check if the title match the selection from the list
-	 * 
-	 * @param textMoed the name of element from the list 
-	 * 
-	 */
+		/*
+		 * isTitle void function check if the title match the selection from the list
+		 * 
+		 * @param textMoed the name of element from the list 
+		 * 
+		 */
 	
 //To Do
 	
@@ -115,28 +117,33 @@ public class ChargesPage extends BaseIsracardPage {
 			switch (textMoed) {			
 		
 			case "בחירת חודש":
-				System.out.println("1");
-				String r=nextCharge.getText();
-				String f= "סה\"כ לחיוב הבא";
-				//assertTrue(nextCharge.getText().equals("סה\"כ לחיוב הבאאאא"), "The charges shown do'nt match the date selection");
-				if (r==f)
-					System.out.println("xxx");
+				
+				assertTrue(nextCharge.getText().contains("הבא"), "The charges shown do'nt match the date selection");
+				
 				break;
 				
 			case "מועד קודם":
-				System.out.println("2");
-			//	assertTrue(previousCharge.getText().equals("oooסה\"כ חיובים קודמים"),"The charges shown do'nt match the date selection");		
+				
+				assertTrue(previousCharge.getText().equals("קודם"),"The charges shown do'nt match the date selection");
+				
 				break;
 				
 			case "מועד קרוב":
-				System.out.println("3");
-			//	assertTrue(previousCharge.getText().equals("oooסה\"כ חיובים קודמים"),"The charges shown do'nt match the date selection");		
+
+				assertTrue(previousCharge.getText().contains("קרוב"),"The charges shown do'nt match the date selection");
+				
 				break;
 			}	
          
 		}
 		
-		public  ChargesPage selectMonth() {
+		
+		/*
+		 * select month from calender
+		 *  
+		 */		
+		
+		public void  selectMonth() {
 			
 			
 			WebDriverWait wait = new WebDriverWait(driver,10000);
@@ -177,16 +184,11 @@ public class ChargesPage extends BaseIsracardPage {
 				
 				
 			}
-			return null;
+		
 		
 		}
-//		try {
-//	        WebDriverWait wait2 = new WebDriverWait(driver,10000);
-//	        wait2.until(ExpectedConditions.elementToBeClickable(element));
-//	        element.click();
-//	        return true;
-//	        
-//	    } catch(Exception e){
-//	        return false;
-//	    }
+
+		
+			
 }
+
