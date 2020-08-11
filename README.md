@@ -1,2 +1,0 @@
-# IsracardCourse
-Isracard Selenium Course
