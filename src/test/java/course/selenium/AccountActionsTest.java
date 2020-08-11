@@ -7,6 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import selenium.course.IsracardHomePage;
+import selenium.course.LogInPage;
+import selenium.course.UnpluggedPage;
+import selenium.course.UpdatePasswordPage;
+
 public class AccountActionsTest {
 	
 	private static WebDriver driver;

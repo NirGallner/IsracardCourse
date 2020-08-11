@@ -9,6 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import selenium.course.ChargesDetailsPage;
+import selenium.course.IsracardHomePage;
+import selenium.course.LogInPage;
+import selenium.course.MyCardsPage;
+import selenium.course.UnpluggedPage;
+
 public class myCardsTest {
 	
 	static WebDriver driver;
