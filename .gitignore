@@ -1,0 +1,28 @@
+# Eclipse
+.classpath
+.project
+.settings/
+ 
+# Intellij
+.idea/
+*.iml
+*.iws
+ 
+# Mac
+.DS_Store
+ 
+# Maven
+/logs/
+/target/
+/doc/
+allure-results/
+/bin/
+/Reports/
+/src/test/resources/webdriver/
+selenium.framework.eml
+pom_REMOTE_25200.xml,pom_LOCAL_25200.xml,pom_BASE_25200.xml,pom_BACKUP_25200.xml
+pom_REMOTE_25200.xml
+pom_LOCAL_25200.xml
+pom_BASE_25200.xml
+pom_BACKUP_25200.xml
+*.log
