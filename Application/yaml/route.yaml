@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+# set your user name
+  name:  user18-hello-world
+spec:
+  to:
+    kind: Service
+# set your user name
+    name:  user18-hello-world
+    weight: 100
+  port:
+    targetPort: 8080
+  wildcardPolicy: None

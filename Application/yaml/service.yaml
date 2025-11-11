@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+# Set your user name
+  name: user18-hello-world
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+# Set your user name
+    app: user18-hello-world
