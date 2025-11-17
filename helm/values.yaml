@@ -1,0 +1,9 @@
+ReplicaNumber: 3
+
+containers:
+  containerPort: 8080
+  image: 'quay.io/<quay-userName>/<imageName>:v2'
+  tag: 'v4'
+
+service:
+  servicePort: 8080
