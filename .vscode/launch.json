@@ -1,0 +1,15 @@
+{
+    // השתמש ב-IntelliSense כדי ללמוד על תכונות אפשריות.
+    // רחף מעל תכונות קיימות כדי לראות את התיאורים שלהן.
+    // למידע נוסף, בקר ב-https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

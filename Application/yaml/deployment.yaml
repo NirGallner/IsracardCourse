@@ -24,7 +24,7 @@ spec:
               protocol: TCP
           imagePullPolicy: IfNotPresent
 # Update with the image you build in part 1
-          image: 'quay.io/rina_saruri/test1:v1'
+          image: 'quay.io/rina_saruri/test1:v2'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
   strategy:
